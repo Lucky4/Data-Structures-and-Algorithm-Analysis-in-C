@@ -1,4 +1,22 @@
-#include "stdafx.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <tchar.h>
+
+
+typedef struct Node
+{
+	int data;
+	struct Node * next;
+}NODE, *PNODE;
+
+int is_empty(PNODE pHead);               //判断链表是否为空
+int is_last(PNODE p, PNODE pHead);       //判断当前位置是否为末尾
+PNODE create_list();                     //创建带头结点单链表，返回头指针
+PNODE find(int x, PNODE pHead);          //查找例程
+PNODE find_previous(int x, PNODE pHead); //查找x的前驱
+void delete_node(int x, PNODE pHead);    //链表删除例程
+void insert(int x, PNODE pHead, PNODE p);//插入例程
+void delete_list(PNODE pHead);           //清空链表
 
 
 /*
