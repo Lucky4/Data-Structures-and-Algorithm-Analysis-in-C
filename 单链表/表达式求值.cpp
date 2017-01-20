@@ -23,9 +23,9 @@ typedef struct StackFloat
 }*SF;			//操作数栈指针变量
 
 
-/*
-创建操作符栈
-*/
+				/*
+				创建操作符栈
+				*/
 SC create_cstack()
 {
 	//申请栈空间
@@ -134,24 +134,32 @@ float f_pop(SF S)
 */
 int is_ptr(char element)
 {
-	int i;
-	for (i = 0; i < 6; i++)
+	int i = 0;
+	while (oprArray[i])
+	{
 		if (element == oprArray[i])
 			return 1;
+		i++;
+	}
 	return 0;
+	//int i;
+	//for (i = 0; i < 6; i++)
+	//	if (element == oprArray[i])
+	//		return 1;
+	//return 0;
 }
 
 //两个操作数进行运算
 float operate(float a, char opr, float b)
 {
 	float result;
-	switch(opr)
+	switch (opr)
 	{
-		case '+': return result = a + b;
-		case '-': return result = a - b;
-		case '*': return result = a * b;
-		case '/': return result = a / b;
-		default: return 0;
+	case '+': return result = a + b;
+	case '-': return result = a - b;
+	case '*': return result = a * b;
+	case '/': return result = a / b;
+	default: return 0;
 	}
 }
 
@@ -185,11 +193,11 @@ int exp_len(char *expression)
 	//导致程序结果错误
 	char rl[100];
 	strcpy(rl, expression);
-	
+
 	//分割字符串
 	//每次分割一个count加一
 	char *token = strtok(rl, ",");
-	int count=0;
+	int count = 0;
 	while (NULL != token)
 	{
 		count++;
@@ -204,14 +212,14 @@ int exp_len(char *expression)
 */
 float postfix(char *expression)
 {
-	float a, b;				//操作数啊a，b以
-	float tpResult;				//临时计算结果
-	char opr;				//操作符
-	int count=exp_len(expression);		//获得表达式字符数组长度
+	float a, b;								//操作数啊a，b以
+	float tpResult;							//临时计算结果
+	char opr;								//操作符
+	int count = exp_len(expression);			//获得表达式字符数组长度
 	char **elements = splite(expression);	//二级指针指向表达式字符数组
-	SF fStack = create_fstack();		//初始化操作数栈
+	SF fStack = create_fstack();			//初始化操作数栈
 
-	//后缀表达式运算
+											//后缀表达式运算
 	int i;
 	for (i = 0; i < count; i++)
 	{
@@ -221,7 +229,7 @@ float postfix(char *expression)
 			printf("%d\n", atoi(*&elements[i]));
 			f_push(atoi(*&elements[i]), fStack);
 		}
-		else							//操作数出栈，运算后进栈
+		else										//操作数出栈，运算后进栈
 		{
 			a = f_pop(fStack);
 			b = f_pop(fStack);
