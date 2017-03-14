@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 
-#define NUM 10 		//图中节点个数
+#define NUM 100 	//图中节点个数
 int STATUS[NUM];	//保存被访问过节点信息
 
 /*
@@ -85,14 +85,24 @@ int has_visited(PNODE Child)
 }
 
 /*
+寻找下一条弧起始点
+*/
+Graph next_vertex(Graph G, int info)
+{
+	Graph pStart = G->pNext;
+	while (pStart->data != info)
+		pStart = pStart->pNext;
+
+	return pStart;
+}
+
+/*
 图的深度优先遍历
 */
 void DFS(Graph G, int Start)
 {
-	//图指针,遍历到查找图开始的节点并指向它
-	Graph pTraverse = G->pNext;
-	while (pTraverse->data != Start)
-		pTraverse = pTraverse->pNext;
+	//图指针,遍历,查找图开始的节点并指向它
+	Graph pTraverse = next_vertex(G, Start);
 
 	//创建栈结构存储遍历过的节点
 	PSTACK S = CreateStack();
@@ -110,29 +120,28 @@ void DFS(Graph G, int Start)
 			//下一个要遍历的节点（即弧尾）
 			PNODE pChild = pTraverse->pAdj;
 
-			if (pChild == NULL)					//若要遍历的节点（即弧尾）是空，则让pTraverse指向空，if循环判断条件时便转向执行出栈操作
+			if (pChild == NULL)							//若要遍历的节点（即弧尾）是空，则让pTraverse指向空，if循环判断条件时便转向执行出栈操作
 			{
 				pTraverse->pAdj = NULL;
 				continue;
 			}
 
-			if (has_visited(pChild))				//若要遍历的节点已经遍历过则转向遍历父节点的下一个儿子
+			if (has_visited(pChild))					//若要遍历的节点已经遍历过则转向遍历父节点的下一个儿子
 			{
+				//寻找下个未遍历过的节点
 				while (has_visited(pChild))
 				{
 					pChild = pChild->pNext;
 				}
-				if (pChild == NULL)
-				{	//若下一个弧终点为空，则弹栈
-					//若栈为空意味着遍历结束，跳出循环
+
+				if (pChild == NULL)						//若下一个弧终点为空，则弹栈
+				{
 					Pop(S);
-					if (IsStackEmpty(S))
+					if (IsStackEmpty(S))				//若栈为空意味着遍历结束，跳出循环
 						break;
 
 					//返回图的该节点的上一个节点的弧起始节点状态
-					pTraverse = G->pNext;
-					while (pTraverse->data != Top(S))
-						pTraverse = pTraverse->pNext;
+					pTraverse = next_vertex(G, Top(S));
 				}
 				else 
 				{	//若要遍历的节点未遍历过
@@ -144,9 +153,7 @@ void DFS(Graph G, int Start)
 					STATUS[pChild->vertex] = 1;
 
 					//寻找下一条弧的起始点
-					pTraverse = G->pNext;
-					while (pTraverse->data != pChild->vertex)
-						pTraverse = pTraverse->pNext;
+					pTraverse = next_vertex(G, pChild->vertex);
 				}
 			}
 			else
@@ -159,9 +166,7 @@ void DFS(Graph G, int Start)
 				STATUS[pChild->vertex] = 1;
 
 				//寻找下一条弧的起始点
-				pTraverse = G->pNext;
-				while (pTraverse->data != pChild->vertex)
-					pTraverse = pTraverse->pNext;;
+				pTraverse = next_vertex(G, pChild->vertex);
 			}
 		}
 		else
@@ -173,25 +178,47 @@ void DFS(Graph G, int Start)
 				break;
 
 			//返回图的该节点的上一个节点的弧起始节点状态
-			pTraverse = G->pNext;
-			while (pTraverse->data != Top(S))
-				pTraverse = pTraverse->pNext;
+			pTraverse = next_vertex(G, Top(S));
 		}
 	}
-
+	printf("\n");
 	return;
 }
 
 /*
 图的广度优先遍历
 */
-//void BFS(Graph G)
-//{
-//	if (NULL == G)	//若图为空则返回
-//		return;
-//
-//
-//}
+void BFS(Graph G, int Start)
+{
+	//图指针,遍历,查找图开始的节点并指向它
+	Graph pTraverse = next_vertex(G, Start);
+
+	//创建队列结构存储遍历过的节点
+	PQUEUE Q = CreateQueue();
+
+	//将Start节点作为深度遍历森林的根，并标记为已遍历过
+	EnQueue(pTraverse->data, Q);
+	STATUS[pTraverse->data] = 1;
+	printf("%d ", Front(Q));
+
+	//只要队列中有元素存在，就遍历其邻接节点
+	while (!IsQueueEmpty(Q))
+	{
+		PNODE pChild = pTraverse->pAdj;
+
+		while (pChild != NULL)
+		{
+			printf("%d ", pChild->vertex);
+			EnQueue(pChild->vertex, Q);
+			pChild = pChild->pNext;
+		}
+		DeQueue(Q);
+		pTraverse = next_vertex(G, Front(Q));
+	}
+
+	printf("\n");
+	return;
+}
 
 
 
@@ -211,13 +238,16 @@ void DFS(Graph G, int Start)
 int main()
 {
 	Graph G = NULL;
-	int flag = 1, C;
+	int flag = 1, C, trav_begin;
 
 	while (flag)
 	{
-		printf("      请输入进行的操作.    \n");
-		printf("|---------1.创建图---------|\n");
-		printf("|---------2.DFS------------|\n");
+		printf("-------------------------------请输入进行的操作-------------------------------\n");
+		printf("|                                                                            |\n");
+		printf("|                              1.创建图                                      |\n");
+		printf("|                              2.DFS                                         |\n");
+		printf("|                              3.BFS                                         |\n");
+		printf("------------------------------------------------------------------------------\n");
 
 		scanf("%d", &C);
 		switch (C)
@@ -230,11 +260,15 @@ int main()
 			break;
 
 		case 2:
-			int trav_begin;
 			printf("请输入遍历起始节点\n");
 			scanf("%d", &trav_begin);
 			DFS(G, trav_begin);
 			break;
+
+		case 3:
+			printf("请输入遍历起始节点\n");
+			scanf("%d", &trav_begin);
+			BFS(G, trav_begin);
 
 		default:
 			flag = 0;
