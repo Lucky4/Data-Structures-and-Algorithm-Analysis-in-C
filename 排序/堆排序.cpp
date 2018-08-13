@@ -8,7 +8,7 @@
 总结：时间复杂度为N*logN。
 */
 
-//上滤操作
+//下滤操作
 void PercDown(ElementType A[], int i, int N)	//i为父节点下标
 {
 	int replChild;		//下滤操作时用来与根节点交换的孩子节点下标
@@ -46,8 +46,10 @@ void HeapSort(ElementType A[], int N)
 {
 	int i, temp;;
 
+    //将最小的元素放在二叉堆顶位置，即数组的0位置
 	for (i = N / 2; i >= 0; i--)
-		PercDown(A, i, N);
+        PercDown(A, i, N);
+        
 	for (i = N - 1; i > 0; i--)
 	{	//交换根与最后的节点数据
 		temp = A[0];
@@ -69,7 +71,8 @@ int main()
 	int i;
 	int a[10] = { 2, 4, 67, 12, 43, 78, 5, 3, 8, 65 };
 
-	HeapSort(a, 10);
+    HeapSort(a, 10);
+    
 	for (i = 0; i < 10; i++)
 		printf("%d,", a[i]);
 
