@@ -2,6 +2,8 @@
     <img src="pics/logo.jpg" width="550px">
     <br>
     <br>
+    <br>
+    <br>
 </div>
 
 # 欢迎来到我的思过崖！
