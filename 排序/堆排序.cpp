@@ -1,38 +1,38 @@
 /*
-¶ÑÅÅÐò
+å †æŽ’åº
 
-Ë¼Â·£º¶ÑÅÅÐò·ÖÎª¹¹½¨¶Ñ¡¢É¾³ý×îÖµ¡¢µ÷Õû¶Ñ¼´ÉÏÂËÏÂÂË²Ù×÷¡£
+æ€è·¯ï¼šå †æŽ’åºåˆ†ä¸ºæž„å»ºå †ã€åˆ é™¤æœ€å€¼ã€è°ƒæ•´å †å³ä¸‹æ»¤æ“ä½œã€‚
 
-·½·¨£ºÊ¹ÓÃÊý×é´úÌæADT£¨³éÏóÊý¾ÝÀàÐÍ£©µÄ·½Ê½ÊµÏÖ³õÊ¼¶ÑÊý×éÏÂ±ê´ÓÁã¿ªÊ¼¡£
+æ–¹æ³•ï¼šä½¿ç”¨æ•°ç»„ä»£æ›¿ADTï¼ˆæŠ½è±¡æ•°æ®ç±»åž‹ï¼‰çš„æ–¹å¼å®žçŽ°åˆå§‹å †æ•°ç»„ä¸‹æ ‡ä»Žé›¶å¼€å§‹ã€‚
 
-×Ü½á£ºÊ±¼ä¸´ÔÓ¶ÈÎªN*logN¡£
+æ€»ç»“ï¼šæ—¶é—´å¤æ‚åº¦ä¸ºO(N*logN)ã€‚
 */
 
-//ÏÂÂË²Ù×÷
-void PercDown(ElementType A[], int i, int N)	//iÎª¸¸½ÚµãÏÂ±ê
+//ä¸‹æ»¤æ“ä½œ
+void PercDown(ElementType A[], int i, int N)	//iä¸ºçˆ¶èŠ‚ç‚¹ä¸‹æ ‡
 {
-	int replChild;		//ÏÂÂË²Ù×÷Ê±ÓÃÀ´Óë¸ù½Úµã½»»»µÄº¢×Ó½ÚµãÏÂ±ê
-	ElementType tmp;	//Ò»°ãÀûÓÃ½»»»½øÐÐµÄÅÅÐò¶¼ÒªÓÐÒ»¸ötmp±äÁ¿
+	int replChild;		//ä¸‹æ»¤æ“ä½œæ—¶ç”¨æ¥ä¸Žæ ¹èŠ‚ç‚¹äº¤æ¢çš„å­©å­èŠ‚ç‚¹ä¸‹æ ‡
+	ElementType tmp;	//ä¸€èˆ¬åˆ©ç”¨äº¤æ¢è¿›è¡Œçš„æŽ’åºéƒ½è¦æœ‰ä¸€ä¸ªtmpå˜é‡
 
-	//Ã¿´Î¿ªÊ¼¶¼ÒªÈ¡³ö×î¶¥µãÏÂ±ê£¬ËùÒÔ¿ÉÒÔÐ´ÔÚforÓï¾äÍ·ÖÐ×÷Îª³õÊ¼Ìõ¼þ
-	//±éÀúµÄÌõ¼þ¾ÍÊÇ¸¸½Úµã»¹ÓÐº¢×Ó
-	//Ö´ÐÐÍê´Ë´ÎÏÂÂË²Ù×÷ºóÐèÒªÕÒµ½ÏÂ´ÎÏÂÂË²Ù×÷µÄ¸¸½Úµã£¬ËùÒÔÎÒÃÇÒ²¿ÉÒÔÐ´µ½forÓï¾äÍ·
-	for (tmp = A[i]; 2*i+1 < N; i = replChild)	//i = replChildÊÇÔÚÓï¾äÌåÖ´ÐÐÖ®ºóÖ´ÐÐµÄ
+	//æ¯æ¬¡å¼€å§‹éƒ½è¦å–å‡ºæœ€é¡¶ç‚¹ä¸‹æ ‡ï¼Œæ‰€ä»¥å¯ä»¥å†™åœ¨forè¯­å¥å¤´ä¸­ä½œä¸ºåˆå§‹æ¡ä»¶
+	//éåŽ†çš„æ¡ä»¶å°±æ˜¯çˆ¶èŠ‚ç‚¹è¿˜æœ‰å­©å­
+	//æ‰§è¡Œå®Œæ­¤æ¬¡ä¸‹æ»¤æ“ä½œåŽéœ€è¦æ‰¾åˆ°ä¸‹æ¬¡ä¸‹æ»¤æ“ä½œçš„çˆ¶èŠ‚ç‚¹ï¼Œæ‰€ä»¥æˆ‘ä»¬ä¹Ÿå¯ä»¥å†™åˆ°forè¯­å¥å¤´
+	for (tmp = A[i]; 2*i+1 < N; i = replChild)	//i = replChildæ˜¯åœ¨è¯­å¥ä½“æ‰§è¡Œä¹‹åŽæ‰§è¡Œçš„
 	{
-		if (2 * i + 1 != N - 1 && A[2 * i + 1] < A[2 * i + 1 + 1])//ÈôÓÒº¢×Ó´æÔÚÇÒÓÒº¢×Ó´óÔò½«ÓÒº¢×ÓÏÂÂË
+		if (2 * i + 1 != N - 1 && A[2 * i + 1] < A[2 * i + 1 + 1])//è‹¥å³å­©å­å­˜åœ¨ä¸”å³å­©å­å¤§åˆ™å°†å³å­©å­ä¸‹æ»¤
 			replChild = 2 * i + 1 + 1;
-		if (2 * i + 1 != N - 1 && A[2 * i + 1] > A[2 * i + 1 + 1])//ÈôÓÒº¢×Ó´æÔÚÇÒÓÒº¢×ÓÐ¡Ôò½«×óº¢×ÓÏÂÂË
+		if (2 * i + 1 != N - 1 && A[2 * i + 1] > A[2 * i + 1 + 1])//è‹¥å³å­©å­å­˜åœ¨ä¸”å³å­©å­å°åˆ™å°†å·¦å­©å­ä¸‹æ»¤
 			replChild = 2 * i + 1;
-		if(2 * i + 1 == N - 1)		//ÈôÓÒº¢×Ó²»´æÔÚÔò½«×óº¢×ÓÏÂÂË
+		if(2 * i + 1 == N - 1)		//è‹¥å³å­©å­ä¸å­˜åœ¨åˆ™å°†å·¦å­©å­ä¸‹æ»¤
 				replChild = 2 * i + 1;
 
-		//ÊéÉÏ·½·¨
+		//ä¹¦ä¸Šæ–¹æ³•
 		//replChild = 2*i+1;
 		//if (replChild != N - 1 && A[replChild + 1] > A[replChild])
 		//	replChild++;
 
-		//Âú×ãº¢×Ó±È¸¸Ç×Êý¾Ý´ó,½«º¢×ÓÊý¾Ý¸³Öµ¸¸Ç×Êý¾Ý,
-		//·ñÔò£¬²»Âú×ã¶Ñ½á¹¹£¬²»ÐèÒªÏÂÂËÌø³öÑ­»·
+		//æ»¡è¶³å­©å­æ¯”çˆ¶äº²æ•°æ®å¤§,å°†å­©å­æ•°æ®èµ‹å€¼çˆ¶äº²æ•°æ®,
+		//å¦åˆ™ï¼Œä¸æ»¡è¶³å †ç»“æž„ï¼Œä¸éœ€è¦ä¸‹æ»¤è·³å‡ºå¾ªçŽ¯
 		if (tmp < A[replChild])
 			A[i] = A[replChild];
 		else
@@ -41,17 +41,17 @@ void PercDown(ElementType A[], int i, int N)	//iÎª¸¸½ÚµãÏÂ±ê
 	A[i] = tmp;
 }
 
-//¶ÑÅÅÐò
+//å †æŽ’åº
 void HeapSort(ElementType A[], int N)
 {
 	int i, temp;;
 
-    //½«×îÐ¡µÄÔªËØ·ÅÔÚ¶þ²æ¶Ñ¶¥Î»ÖÃ£¬¼´Êý×éµÄ0Î»ÖÃ
+        //æ ¹æ®æ•°ç»„æž„å»ºå †
 	for (i = N / 2; i >= 0; i--)
         PercDown(A, i, N);
         
 	for (i = N - 1; i > 0; i--)
-	{	//½»»»¸ùÓë×îºóµÄ½ÚµãÊý¾Ý
+	{	//äº¤æ¢æ ¹ä¸Žæœ€åŽçš„èŠ‚ç‚¹æ•°æ®
 		temp = A[0];
 		A[0] = A[i];
 		A[i] = temp;
