@@ -1,6 +1,7 @@
 <div align="center">
     <img src="pics/logo.jpg" width="550px">
-    
+    <br>
+    <br>
 </div>
 
 | :pencil2: | :computer: | :cloud: | :couple: | :floppy_disk: | :coffee: | :bulb: | :hammer: | :speak_no_evil: |
