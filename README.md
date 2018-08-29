@@ -17,7 +17,7 @@
 
 ## 内容概览
 
-| :grapes: | :melon: | :watermelon: | :tangerine: | :lemon: | :banana: | :Cherries: | :pineapple: | :apple: | :strawberry: |
+| :grapes: | :melon: | :watermelon: | :tangerine: | :lemon: | :banana: | :cherries: | :pineapple: | :apple: | :strawberry: |
 | :--------: | :---------: | :---------: | :---------: | :---------:| :---------: | :---------: | :-------: | :-------:| :------:|
 | 链表 | 栈 | 队列 | 二叉树 | 优先队列 | 排序 | 不相交集ADT | 哈希表 | 查找 | 图 |
 <br>
