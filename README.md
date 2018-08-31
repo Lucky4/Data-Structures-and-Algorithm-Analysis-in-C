@@ -52,7 +52,7 @@
     * [堆排序](./排序/堆排序.cpp)
 
 * 不相交集ADT
-    * [不想交集ADT定义](./不相交集ADT/DisjSet.md)
+    * [不相交集ADT定义](./不相交集ADT/DisjSet.md)
 
 * 哈希表
     * [分离链接法](./哈希表/分离链接法/HashTable.cpp)
