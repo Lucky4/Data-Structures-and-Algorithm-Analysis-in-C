@@ -38,7 +38,7 @@ public class ADT {
             if (this.relations[elem1] == this.relations[elem2]) {
                 this.relations[elem2] -= 1;
             }
-            this.relations[elem1] = elem2;
+            this.relations[elem2] = elem1;
         }
     }
 
