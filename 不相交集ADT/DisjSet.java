@@ -33,7 +33,7 @@ public class ADT {
 
     public void UnionEnhace(int elem1, int elem2) {
         if (this.relations[elem1] > this.relations[elem2]) {
-            this.relations[elem2] = elem1;
+            this.relations[elem1] = elem2;
         } else {
             if (this.relations[elem1] == this.relations[elem2]) {
                 this.relations[elem2] -= 1;
@@ -43,9 +43,7 @@ public class ADT {
     }
 
     public int Find(int elem) {
-        if (this.relations[elem] == 0) {
-            return elem;
-        } else if (this.relations[elem] < 0) {
+        if (this.relations[elem] <= 0) {
             return elem;
         } else {
             return Find(this.relations[elem]);
