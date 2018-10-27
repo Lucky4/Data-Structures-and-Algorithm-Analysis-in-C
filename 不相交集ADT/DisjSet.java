@@ -33,12 +33,12 @@ public class ADT {
 
     public void UnionEnhace(int elem1, int elem2) {
         if (this.relations[elem1] > this.relations[elem2]) {
-            this.relations[elem1] = elem2;
+            this.relations[elem2] = elem1;
         } else {
             if (this.relations[elem1] == this.relations[elem2]) {
                 this.relations[elem2] -= 1;
             }
-            this.relations[elem2] = elem1;
+            this.relations[elem1] = elem2;
         }
     }
 
